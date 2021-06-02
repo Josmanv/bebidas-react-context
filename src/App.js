@@ -4,10 +4,12 @@ import Footer from './components/Footer';
 import Formulario from './components/Formulario';
 
 import CategoriasProvider from './context/CategoriasContext';
+import RecetasProvider from './context/RecetasContext';
 
 function App() {
   return (
     <CategoriasProvider>
+    <RecetasProvider>
       <Header />
       <div className="container mt-5">
         <div className="row">
@@ -15,6 +17,7 @@ function App() {
         </div>
       </div>
       <Footer />
+    </RecetasProvider>
     </CategoriasProvider>
   );
 }
