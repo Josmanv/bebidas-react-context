@@ -1,6 +1,23 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
+import {CategoriasContext} from '../context/CategoriasContext';
 
 const Formulario = () => {
+
+const {categorias} = useContext(CategoriasContext);
+
+const [busqueda, setBusqueda] = useState({
+    nombre:'',
+    categoria:''
+});
+
+const obtenerDatosReceta = e => {
+    setBusqueda({
+        ...busqueda,
+        [e.target.name] : e.target.value
+    });
+}
+
+
     return ( 
         <form className="col-12">
             <fieldset className="text-center">
@@ -14,14 +31,22 @@ const Formulario = () => {
                     className="form-control"
                     type="text"
                     placeholder="Buscar por ingrediente"
+                    onChange={obtenerDatosReceta}
                     />
                 </div>
                 <div className="col-md-4 mt-4">
                     <select
                     name="categoria"
                     className="form-control"
+                    onChange={obtenerDatosReceta}
                     >
                     <option value="">-- Selecciona Categoría --</option>
+                    {categorias.map(categoria => (
+                        <option
+                        value={categoria.strCategory}
+                        key={categoria.strCategory}
+                        >{categoria.strCategory}</option>
+                    ))}
                     </select>
                 </div>
                 <div className="col-md-4 mt-4">
