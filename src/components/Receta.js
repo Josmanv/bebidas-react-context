@@ -22,6 +22,11 @@ const useStyles = makeStyles(theme => ({
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
+    scroll: { 
+        maxHeight: '500px', 
+        overflowY: 'scroll', 
+        overflowX: 'none' 
+    },
 }));
 
 const Receta = ({receta}) => {
@@ -68,15 +73,15 @@ const Receta = ({receta}) => {
                         }}
                      >
                          <div style={modalStyle} className={classes.paper}>
-                            <h2>{informacion.strDrink}</h2>
-                            <h3 className="mt-4">Instrucciones</h3>
-                            <p>
-                                {informacion.strInstructions}
-                            </p>
+                            <div className={ classes.scroll }>
+                                <h2>{informacion.strDrink}</h2>
+                                <h3 className="mt-4">Instrucciones</h3>
+                                <p>
+                                    {informacion.strInstructions}
+                                </p>
 
-                            <img className="img-fluid my-4" src={informacion.strDrinkThumb} />
-
-                           
+                                <img className="img-fluid my-4" src={informacion.strDrinkThumb} />
+                            </div>
                          </div>
                      </Modal>
                     
