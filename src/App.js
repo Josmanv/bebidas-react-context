@@ -6,20 +6,25 @@ import ListaRecetas from './components/ListaRecetas';
 
 import CategoriasProvider from './context/CategoriasContext';
 import RecetasProvider from './context/RecetasContext';
+import ModalProvider from './context/ModalContext';
 
 function App() {
   return (
     <CategoriasProvider>
-    <RecetasProvider>
-      <Header />
-      <div className="container mt-5">
-        <div className="row">
-          <Formulario />
-        </div>
-        <ListaRecetas />
-      </div>
-      <Footer />
-    </RecetasProvider>
+      <RecetasProvider>
+        <ModalProvider>
+          <Header />
+
+            <div className="container mt-5">
+              <div className="row">
+                <Formulario />
+              </div>
+              <ListaRecetas />
+            </div>
+            
+          <Footer />
+        </ModalProvider>
+      </RecetasProvider>
     </CategoriasProvider>
   );
 }
