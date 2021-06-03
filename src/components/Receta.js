@@ -19,8 +19,9 @@ const useStyles = makeStyles(theme => ({
       position: 'absolute',
       width: 600,
       backgroundColor: theme.palette.background.paper,
-      boxShadow: theme.shadows[5],
+      boxShadow: theme.shadows[2],
       padding: theme.spacing(2, 4, 3),
+      borderRadius: 20,
     },
     scroll: { 
         maxHeight: '500px', 
@@ -45,9 +46,23 @@ const Receta = ({receta}) => {
       };
 
     //Extraer los valores del context
-    const { informacion, guardarIdReceta} = useContext(ModalContext);
+    const { informacion, guardarIdReceta, guardarRecetaDrinks} = useContext(ModalContext);
 
-    // const {strDrink, strDrinkThumb, idDrink} = informacion;
+    // const {strDrink, strDrinkThumb, idDrink} = informacion;ç
+
+    //Muestra y formatea los ingredientes
+
+    const mostrarIngredientes = info =>{
+        let ingredientes = [];
+        for(let i=1; i<16; i++){
+            if(info[`strIngredient${i}`]){
+                ingredientes.push(
+                    <li>{info[`strIngredient${i}`]} - {info[`strMeasure${i}`]}</li>
+                );
+            }
+        }
+        return ingredientes;
+    }
 
     return ( 
         <div className="col-md-4 mb-3">
@@ -69,6 +84,7 @@ const Receta = ({receta}) => {
                         open={open}
                         onClose={() => {
                             guardarIdReceta(null);
+                            guardarRecetaDrinks({});
                             handleClose();
                         }}
                      >
@@ -81,6 +97,11 @@ const Receta = ({receta}) => {
                                 </p>
 
                                 <img className="img-fluid my-4" src={informacion.strDrinkThumb} />
+
+                                <h3>Ingredientes y Cantidades</h3>
+                                <ul>
+                                    {mostrarIngredientes(informacion)}
+                                </ul>
                             </div>
                          </div>
                      </Modal>
