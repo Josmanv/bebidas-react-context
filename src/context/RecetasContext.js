@@ -9,12 +9,21 @@ const RecetasProvider = (props) => {
         nombre:'',
         categoria:''
     });
+
+    const [error, seterror] = useState(false);
     const [consultar, guardarConsultar] = useState(false);
 
     const {nombre, categoria} = busquedaReceta;
 
     useEffect(()=>{
         if(consultar) {
+            if(nombre === '' || categoria === ''){
+                seterror(true);
+                return; 
+            }
+            else{
+                seterror(false);
+            }
             const obtenerBebidasPorIngrediente = async () =>{
                 const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${nombre}&c=${categoria}`;
                 const bebidasPorIngrediente = await axios.get(url);
@@ -30,6 +39,7 @@ const RecetasProvider = (props) => {
         <RecetasContext.Provider
             value={{
                 recetas,
+                error,
                 buscarRecetas,
                 guardarConsultar
             }}

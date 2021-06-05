@@ -1,11 +1,13 @@
 import React, {useContext, useState} from 'react';
 import {CategoriasContext} from '../context/CategoriasContext';
 import {RecetasContext} from '../context/RecetasContext';
+import Error from './Error';
+
 
 const Formulario = () => {
 
 const {categorias} = useContext(CategoriasContext);
-const {buscarRecetas, guardarConsultar} = useContext(RecetasContext);
+const {buscarRecetas, guardarConsultar, error} = useContext(RecetasContext);
 
 const [busqueda, setBusqueda] = useState({
     nombre:'',
@@ -17,6 +19,11 @@ const obtenerDatosReceta = e => {
         ...busqueda,
         [e.target.name] : e.target.value
     });
+}
+
+let  componente;
+if(error){
+  componente = <Error mensaje="Introduce Ingredientes y categorías" />
 }
 
     return ( 
@@ -63,6 +70,12 @@ const obtenerDatosReceta = e => {
                     className="btn btn-block btn-outline-info"
                     value="Buscar Bebidas"
                     />
+                </div>
+            </div>
+
+            <div className="row text-center mt-4">
+                <div className="col-md-12">
+                    {componente}
                 </div>
             </div>
 
